@@ -32,4 +32,15 @@
     <button type="submit" onclick="return confirm('Delete account?')">Delete Account</button>
 </form>
 
+@php
+    $canCreate = auth()->user()->roles()
+        ->join('role_permissions', 'user_roles.RoleID', '=', 'role_permissions.RoleID')
+        ->where('role_permissions.Description', 'Create')->exists();
+@endphp
+
+@if($canCreate)
+    <a href="{{ route('todos.create') }}" class="btn btn-primary">New Task</a>
+@endif
+
+
 </x-app-layout>

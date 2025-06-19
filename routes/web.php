@@ -20,4 +20,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/todos', [TodoController::class, 'index'])->name('todos.index');
+    // ...other To-Do routes (CRUD) here
+});
+
 require __DIR__.'/auth.php';

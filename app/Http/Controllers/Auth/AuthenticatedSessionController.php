@@ -44,4 +44,12 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+    protected function authenticated(Request $request, $user)
+{
+    if ($user->roles()->where('RoleName', 'admin')->exists()) {
+        return redirect()->route('admin.index');
+    }
+    return redirect()->route('todos.index');
+}
+
 }
